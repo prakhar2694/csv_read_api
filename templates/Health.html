@@ -55,18 +55,66 @@
         let value = decodeURI($(btn).data('value'));
         $('#selected').text(value);
         console.log("Clicked",value)
+
+        var myTableBody = $('#my-table-id tbody');
         $.ajax({
 				url:`http://127.0.0.1:4000/contents?item=${value}`,
 				type: "GET",
 				success: function (content){
 					console.log(content);
           $('#content').empty();
+          console.log("content",content.carbohydrate)
+          var tableRow = `
+          <tr>
+                            <td>
+                              Carbohydrate
+                            </td>
+                            <td>
+                              Protien
+                            </td>
+                            <td>
+                              Fiber
+                            </td>
+                            <td>
+                              Saturated Fat
+                            </td>
+                            <td>
+                              Sugar
+                            </td>
+                            <td>
+                              Water
+                            </td>
+                           </tr>
+          <tr>
+                            <td>
+                              ${content.carbohydrate}
+                            </td>
+                            <td>
+                              ${content.protien}
+                            </td>
+                            <td>
+                              ${content.fiber}
+                            </td>
+                            <td>
+                              ${content.saturated_fat}
+                            </td>
+                            <td>
+                              ${content.sugar}
+                            </td>
+                            <td>
+                              ${content.water}
+                            </td>
+                           </tr>`
+
+           myTableBody
+             .append(tableRow);
+
 				},
 				error: function (error) {
 					console.log(error);
 				}
 			});
-      }
+     }
 	
 	</script>
   </head>
@@ -129,8 +177,9 @@
                   <li><a href="#" data-value="Something else here" onclick="dropdownAction(this)">Something else here</a></li>
                   
                 </ul>
+                
               </div>
-
+              <table id="my-table-id" ><tbody></tbody></table>
             </div>
             <!-- Design body -->
 

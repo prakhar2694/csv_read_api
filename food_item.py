@@ -11,7 +11,7 @@ api = Api(app)
 
 class Foods(Resource):
 	def get(self):
-		food=pd.read_csv('C:\\Users\\SPURGE\\csv_read_api\\food.csv')
+		food=pd.read_csv('./food.csv')
 		food.columns = [c.replace(' ', '_') for c in food.columns]
 		food.columns = [c.replace('.', '_') for c in food.columns]
 		pd.set_option('display.max_columns', None)

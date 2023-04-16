@@ -15,7 +15,7 @@ class Contents(Resource):
     def get(self):
         item = request.args.get('item')
         items={'protien':'','carbohydrate':'','fiber':'','water':'','sugar':'','saturated_fat':''}
-        food = pd.read_csv('C:\\Users\\SPURGE\\csv_read_api\\food.csv')
+        food = pd.read_csv('./food.csv')
         food.columns = [c.replace(' ', '_') for c in food.columns]
         food.columns = [c.replace('.', '_') for c in food.columns]
         pd.set_option('display.max_columns', None)
