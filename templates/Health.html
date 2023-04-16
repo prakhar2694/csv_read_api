@@ -32,6 +32,7 @@
 	<script>
 	
 		$(document).ready(function (){
+     // debugger;
 			$.ajax({
 				url:"http://127.0.0.1:5000/foods",
 				type: "GET",
@@ -39,7 +40,8 @@
 					console.log(result);
           $('#result').empty();
           for (var li in result) {
-           $('#result').append(`<li><a href="#" data-value=${result[li]} onclick="dropdownAction(this)">${result[li]}</a></li>`)
+           $('#result').append(`<li><a href="#" data-value=${encodeURI(result[li])} onclick="dropdownAction(this)">${result[li]}</a></li>`)
+           //console.log("Clicked")
           }
 				},
 				error: function (error) {
@@ -50,8 +52,20 @@
 		})
 
     function dropdownAction(btn){
-        let value = $(btn).data('value');
+        let value = decodeURI($(btn).data('value'));
         $('#selected').text(value);
+        console.log("Clicked",value)
+        $.ajax({
+				url:`http://127.0.0.1:4000/contents?item=${value}`,
+				type: "GET",
+				success: function (content){
+					console.log(content);
+          $('#content').empty();
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
       }
 	
 	</script>
