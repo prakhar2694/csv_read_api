@@ -32,4 +32,4 @@ api.add_resource(Foods, '/foods')
 
 
 if __name__ == '__main__':
-    app.run()  # run our Flask app
+    app.run(host='0.0.0.0', port=5000,debug=True)  # run our Flask app
